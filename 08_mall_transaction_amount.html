@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="src/css/reset.css">
+    <link rel="stylesheet" href="src/css/mian.css"></head>
+<body>
+<div class="header clearfix">
+    <div class="logo">
+        <img src="src/image/logo.png" alt="logo"></div>
+    <h1 class="title">农银e管家电商平台交易金额视图</h1>
+    <div class="msg  clearfix">
+        <div class="msg_time">
+            <p id="showtime">&nbsp;&nbsp;&nbsp;</p>
+            <p id="showdate">&nbsp;&nbsp;&nbsp;</p>
+        </div>
+        <div class="msg_weather" style="padding-top: 20px;">
+            <iframe scrolling="no" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=48&color=%23FFFFFF&icon=1&num=2&site=17"></iframe>
+        </div>
+    </div>
+</div>
+<div class="containner  e_mt20">
+    <div class="scjyje_top  e_mt15 ">
+        <div class="num_view_pink ">
+            <h2 class="chart_title_white">本季度发生总交易金额（元）</h2>
+            <p class="num  e_tac">
+                <span>4</span>
+                <span>4</span>
+                <span>8</span> <i>,</i>
+                <span>6</span>
+                <span>3</span>
+                <span>3</span> <i>,</i>
+                <span>7</span>
+                <span>1</span>
+                <span>8</span>
+            </p>
+        </div>
+        <div class="num_view_pink ">
+            <h2 class="chart_title_white">本年累计总交易金额（元）</h2>
+            <p class="num  e_tac">
+                <span>4</span>
+                <span>4</span>
+                <span>8</span>
+                <i>,</i>
+                <span>6</span>
+                <span>3</span>
+                <span>3</span>
+                <i>,</i>
+                <span>7</span>
+                <span>1</span>
+                <span>8</span>
+            </p>
+        </div>
+    </div>
+    <div class="e_p20 scjyje_bottom  chart_bg_blue  chart_boder_blue" >
+        <div class="mta_legend">
+            <h2 class="e_tac" onclick="myrefresh(oMtcBar1,optionBar1)">
+                <span class="e_bg_ffe400"></span>
+                本季度交易笔数（万笔）
+            </h2>
+            <p class="e_tal">TOP5</p>
+        </div>
+        <div class="mta_legend" onclick="myrefresh(oMtcBar2,optionBar2)">
+            <h2 class="e_tac">
+                <span class="e_bg_00c6ff"></span>
+                本年累计总交易笔数（万笔）
+            </h2>
+            <p class="e_tal">TOP5</p>
+        </div>
+        <div class="bjdjyje_bar"  id="mtc_bar1" ></div>
+        <div class="bnljzjyje_bar"  id="mtc_bar2" ></div>
+        <div class="sfjyje_bar"  id="mtc_bar3" ondblclick="myrefresh(oMtcBar3,optionBar3)"></div>
+    </div>
+</div>
+</body>
+<script src="src/js/echarts.js"></script>
+<script src="src/js/china.js"></script>
+<script src="src/js/jquery v1.11.1min.js"></script>
+<script src="src/js/mian.js"></script>
+<script>
+function myrefresh(obj, chart) {
+    obj.clear();
+    obj.setOption(chart);
+}
+var oMtcBar1 = echarts.init(document.getElementById('mtc_bar1'));
+var mtcbar1YaxisVal = ['山东省分行', '四川省分行', '广东省分行', '江苏省分行', '浙江省分行'];
+var mtcbar1DataVal = [1000, 1470, 1700, 1800, 2270];
+var optionBar1= {
+    title: {
+        show: false
+    },
+    tooltip: {
+        trigger: "axis",
+        show: false
+    },
+
+    legend: {
+        data: ['111'],
+        top: 0
+    },
+    grid: {
+        top: 0,
+        left: 200,
+        right: 150,
+        bottom: 0
+    },
+    calculable: true,
+    xAxis: [{
+        type: "value",
+        boundaryGap: [0, 0],
+
+        show: false,
+        axisLine: {
+            show: false
+        },
+        splitLine: {
+            show: false
+        },
+        axisTick: {
+            show: false
+        }
+
+    }],
+    yAxis: [{
+        type: "category",
+        data: [{
+            value: "5、" + mtcbar1YaxisVal[0],
+            textStyle: {
+                color: '#fff',
+                fontSize: 20
+            }
+        }, {
+            value: "4、" + mtcbar1YaxisVal[1],
+            textStyle: {
+                color: '#fff',
+                fontSize: 20
+            }
+        }, {
+            value: "3、" + mtcbar1YaxisVal[2],
+            textStyle: {
+                color: '#fff',
+                fontSize: 20
+            }
+        }, {
+            value: "2、" + mtcbar1YaxisVal[3],
+            textStyle: {
+                color: '#fff',
+                fontSize: 20
+            }
+        }, {
+            value: "1、" + mtcbar1YaxisVal[4],
+            textStyle: {
+                color: '#fff',
+                fontSize: 20
+            }
+        }],
+        axisLine: {
+            show: false
+        },
+        splitLine: {
+            show: false
+        },
+        axisTick: {
+            show: false
+        },
+        axisLabel: {
+            margin: 10
+        }
+    }, {
+        type: "category",
+        data: mtcbar1DataVal,
+        axisLine: {
+            show: false
+        },
+        splitLine: {
+            show: false
+        },
+        axisTick: {
+            show: false
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#fff',
+                fontSize: 20
+            },
+            formatter: '{value} 万户'
+        }
+    }],
+    series: [{
+            name: "本季度交易笔数（万元） ",
+            type: "bar",
+            barWidth: 20,
+            z: 10,
+            tooltip: {
+                show: false
+            },
+            data: mtcbar1DataVal,
+            itemStyle: {
+                normal: {
+                    color: '#ffe400'
+                }
+            },
+            markPoint: {
+                data: [{
+                    label: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    x: 68,
+                    y: 22,
+                    symbol: 'image://src/image/icon_top1.png',
+                    symbolSize: [22, 24]
+                }, {
+                    label: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    x: 68,
+                    y: 62,
+                    symbol: 'image://src/image/icon_top2.png',
+                    symbolSize: [22, 24]
+                }, {
+                    label: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    x: 68,
+                    y: 102,
+                    symbol: 'image://src/image/icon_top3.png',
+                    symbolSize: [22, 24]
+                }, {
+                    label: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    x: 67,
+                    y: 142,
+                    symbol: 'image://src/image/icon_top4.png',
+                    symbolSize: [22, 24]
+                }, {
+                    label: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    x: 68,
+                    y: 182,
+                    symbol: 'image://src/image/icon_top5.png',
+                    symbolSize: [22, 24]
+                }]
+            }
+
+        }, {
+            name: "本季度交易笔数（万元） ",
+            type: "bar",
+            barWidth: 20,
+            silent: true,
+            itemStyle: {
+                normal: {
+                    color: 'rgba(255,168,0,0.3)'
+                }
+            },
+            tooltip: {
+                show: false
+            },
+            barGap: '-100%',
+            data: [ mtcbar1DataVal[4],  mtcbar1DataVal[4],  mtcbar1DataVal[4],  mtcbar1DataVal[4],  mtcbar1DataVal[4]]
+        }
+
+    ]
+};
+oMtcBar1.setOption(optionBar1);
+var oMtcBar2 = echarts.init(document.getElementById('mtc_bar2'));
+var mtcbar2YaxisVal = ['山东省分行', '四川省分行', '广东省分行', '江苏省分行', '浙江省分行'];
+var mtcbar2DataVal = [1000, 1470, 1700, 1800, 2270];
+var optionBar2 = {
+    title: {
+        show: false
+    },
+    tooltip: {
+        trigger: "axis",
+        show: false
+    },
+    grid: {
+        top: 0,
+        left: 200,
+        right: 150,
+        bottom: 0
+    },
+    calculable: true,
+    xAxis: [{
+        type: "value",
+        boundaryGap: [0, 0],
+
+        show: false,
+        axisLine: {
+            show: false
+        },
+        splitLine: {
+            show: false
+        },
+        axisTick: {
+            show: false
+        }
+
+    }],
+    yAxis: [{
+        type: "category",
+        data: [{
+            value: "5、" + mtcbar2YaxisVal[0],
+            textStyle: {
+                color: '#fff',
+                fontSize: 20
+            }
+        }, {
+            value: "4、" + mtcbar2YaxisVal[0],
+            textStyle: {
+                color: '#fff',
+                fontSize: 20
+            }
+        }, {
+            value: "3、" + mtcbar2YaxisVal[0],
+            textStyle: {
+                color: '#fff',
+                fontSize: 20
+            }
+        }, {
+            value: "2、" + mtcbar2YaxisVal[0],
+            textStyle: {
+                color: '#fff',
+                fontSize: 20
+            }
+        }, {
+            value: "1、" + mtcbar2YaxisVal[0],
+            textStyle: {
+                color: '#fff',
+                fontSize: 20
+            }
+        }],
+        axisLine: {
+            show: false
+        },
+        splitLine: {
+            show: false
+        },
+        axisTick: {
+            show: false
+        },
+        axisLabel: {
+            margin: 10
+        }
+    }, {
+        type: "category",
+        data: mtcbar2DataVal,
+        axisLine: {
+            show: false
+        },
+        splitLine: {
+            show: false
+        },
+        axisTick: {
+            show: false
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#fff',
+                fontSize: 20
+            },
+            formatter: '{value} 万户'
+        }
+    }],
+    series: [{
+        name: "本季度交易金额（万元） ",
+        type: "bar",
+        barWidth: 20,
+        z: 10,
+        tooltip: {
+            show: false
+        },
+        data: mtcbar2DataVal,
+        itemStyle: {
+            normal: {
+                color: 'rgba(0,198,255,1)'
+            }
+        },
+    }, {
+        name: "本季度交易金额（万元） ",
+        type: "bar",
+        barWidth: 20,
+        silent: true,
+        itemStyle: {
+            normal: {
+                color: 'rgba(0,198,255,0.3)'
+            }
+        },
+        markPoint: {
+            data: [{
+                label: {
+                    normal: {
+                        show: false
+                    }
+                },
+                x: 68,
+                y: 22,
+                symbol: 'image://src/image/icon_top1.png',
+                symbolSize: [22, 24]
+            }, {
+                label: {
+                    normal: {
+                        show: false
+                    }
+                },
+                x: 68,
+                y: 62,
+                symbol: 'image://src/image/icon_top2.png',
+                symbolSize: [22, 24]
+            }, {
+                label: {
+                    normal: {
+                        show: false
+                    }
+                },
+                x: 68,
+                y: 102,
+                symbol: 'image://src/image/icon_top3.png',
+                symbolSize: [22, 24]
+            }, {
+                label: {
+                    normal: {
+                        show: false
+                    }
+                },
+                x: 67,
+                y: 142,
+                symbol: 'image://src/image/icon_top4.png',
+                symbolSize: [22, 24]
+            }, {
+                label: {
+                    normal: {
+                        show: false
+                    }
+                },
+                x: 68,
+                y: 182,
+                symbol: 'image://src/image/icon_top5.png',
+                symbolSize: [22, 24]
+            }]
+        },
+        tooltip: {
+            show: false
+        },
+        barGap: '-100%',
+        data: [mtcbar2DataVal[4], mtcbar2DataVal[4], mtcbar2DataVal[4], mtcbar2DataVal[4], mtcbar2DataVal[4]]
+    }]
+};
+oMtcBar2.setOption(optionBar2);
+var oMtcBar3 = echarts.init(document.getElementById('mtc_bar3'));
+var mtcbar3XaxisVal = ['陕西省', '北京市', '天津市', '某某某', '某某省', '某某省', '某某省', '某某省', '某某省', '某某省', '某某省', '某某省', '某某省', '某某省', '某某省', '某某省', '某某省', '某某省', '某某省', '某某省', '某某省', '某某省', '某某省', '某某省', '某某省', '某某省', '某某省', '某某省', '某某省', '某某省', '某某省', '某某省', '某某省', '某某省'];
+var mtcbar3DataVal = [210, 180, 173, 163, 152, 111, 100, 90, 87, 80, 76, 75, 73, 54, 32, 21, 20, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, ];
+var optionBar3 = {
+    title: {
+        show: false
+    },
+    tooltip: {},
+    legend: {
+        show: false
+    },
+    grid: {
+        top: 50,
+        left: 20,
+        right: 20,
+        bottom: 30
+    },
+    xAxis: {
+        data: mtcbar3XaxisVal,
+        interval: 1,
+        boundaryGap: 15,
+        axisLine: {
+            lineStyle: {
+                color: '#06bcff',
+            }
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#fff',
+                fontSize: 9
+            },
+            rotate: 30
+        },
+    },
+    yAxis: {
+        interval: 50,
+        axisLine: {
+            lineStyle: {
+                color: '#06bcff'
+            },
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#fff',
+                fontSize: 14
+            }
+        },
+        splitLine: {
+            show: true,
+            lineStyle: {
+                color: '#113768',
+                type: 'dashed'
+            }
+        }
+    },
+    series: [{
+        name: '交易金额',
+        type: 'bar',
+        barWidth: 20,
+        itemStyle: {
+            normal: {
+                color: '#ffe400',
+                label: {
+                    show: false
+                }
+            }
+        },
+        data: mtcbar3DataVal
+    }]
+};
+oMtcBar3.setOption(optionBar3);
+</script>
+</html>

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="src/css/reset.css">
+    <link rel="stylesheet" href="src/css/mian.css"></head>
+<body>
+<div class="header clearfix">
+    <div class="logo">
+        <img src="src/image/logo.png" alt="logo"></div>
+    <h1 class="title">银企通数据视图</h1>
+    <div class="msg  clearfix">
+        <div class="msg_time">
+            <p id="showtime">&nbsp;&nbsp;&nbsp;</p>
+            <p id="showdate">&nbsp;&nbsp;&nbsp;</p>
+        </div>
+        <div class="msg_weather" style="padding-top: 20px;">
+                <iframe scrolling="no" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=48&color=%23FFFFFF&icon=1&num=2&site=17"></iframe>
+            </div>
+    </div>
+</div>
+<div class="blue_bar"></div>
+<div class="containner clearfix">
+    <div class="yqt_top  yqt_bg1">
+        <h2 class="chart_title_blue chart_title_bg6  e_tac" onclick="myrefresh(oBecLine1,optionLine1)">注册客户数累计图(千万户)</h2>
+        <div class="zckhsljt_line"  id="bec_line1"></div>
+    </div>
+    <div class="yqt_bottom  clearfix e_mt10 ">
+        <div  class=" e_pl20  e_pr20  e_pb20  yqt_bg2  yqt_bottom_left">
+            <h2 class="chart_title_blue chart_title_bg5  e_pl20  e_tac" onclick="myrefresh(oBecBar1,optionBar1)">交易笔数月度图(万笔)</h2>
+            <div  class=" jybsydt_bar" id="bec_bar1"></div>
+        </div>
+        <div  class="e_pl20  e_pr20  e_pb20   yqt_bg3   e_ml10 yqt_bottom_right">
+            <h2 class="chart_title_blue chart_title_bg5  e_tac" onclick="myrefresh(oBecBar2,optionBar2)">交易金额月度图(亿元)</h2>
+            <div class=" jyjeydt_bar" id="bec_bar2"> </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="src/js/echarts.js"></script>
+<script src="src/js/china.js"></script>
+<script src="src/js/jquery v1.11.1min.js"></script>
+<script src="src/js/mian.js"></script>
+<script>
+function myrefresh(obj,chart){
+       obj.clear();
+       obj.setOption(chart);
+}
+//line1
+var oBecLine1 = echarts.init(document.getElementById('bec_line1'));
+//line1折线数据
+var becline1DataVal1 = [30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41];
+//line1 x轴数据
+var becline1YaxisVal = ['20160330', '20160430', '20160530', '20160630', '20160730', '20160831', '20160930', '20161031', '20161130', '20161231', '20170131', '20170228'];
+var optionLine1 = {
+    grid: {
+        left: 300,
+        top: 50,
+        bottom: 40,
+        right: 300,
+        containLabel: true
+    },
+    tooltip: {
+        show: true,
+        trigger: 'axis',
+        backgroundColor: '#384157',
+        borderColor: '#384157',
+        borderWidth: 1,
+        formatter: '{a}<br>{b}:{c}（千万户）',
+        extraCssText: 'box-shadow: 0 0 5px rgba(0, 0, 0, 1)',
+        textStyle: {
+            fontSize: 20
+        }
+    },
+    legend: {
+        show: false
+    },
+    title: {
+        show: false,
+        textStyle: {
+            color: '#5c6076'
+        }
+    },
+    xAxis: {
+        boundaryGap: 10,
+        axisLine: {
+            lineStyle: {
+                color: '#31cee9',
+                width: 2
+            }
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#31cee9',
+                fontSize: 16
+            },
+        },
+        data: becline1YaxisVal
+    },
+    yAxis: {
+        interval: 10,
+        name: "（单位：千万户）",
+        nameLocation: "end",
+        nameTextStyle: {
+            fontSize: 12
+        },
+        axisLine: {
+            lineStyle: {
+                color: '#31cee9',
+                width: 2
+            },
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#31cee9',
+                fontSize: 16
+            }
+        },
+        splitLine: {
+            show: true,
+            lineStyle: {
+                color: '#113768'
+            }
+        }
+    },
+    series: [{
+        type: 'bar',
+        name: '注册客户数',
+        tooltip: {
+            show: false
+        },
+        animation: true,
+        barWidth: 0.02,
+        hoverAnimation: false,
+        itemStyle: {
+            normal: {
+                color: '#f17a52',
+                opacity: 0.6,
+                label: {
+                    show: false
+                },
+                borderWidth: 2,
+                borderColor: '#177fa2',
+                borderType: 'dashed'
+            }
+        },
+        data: becline1DataVal1
+    }, {
+        type: 'line',
+        name: '注册客户数',
+        smooth: false,
+        symbolSize: 10,
+        animation: true,
+        lineWidth: 2,
+        hoverAnimation: false,
+        symbol: 'circle',
+        itemStyle: {
+            normal: {
+                color: '#31cee9',
+                shadowBlur: 40,
+                label: {
+                    show: true,
+                    position: 'top',
+                    textStyle: {
+                        color: '#31cee9',
+                        fontSize: 20
+                    }
+                }
+            }
+        },
+        areaStyle: {
+            normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: 'rgba(25,158,243,0.6)'
+                }, {
+                    offset: 1,
+                    color: 'rgba(25,158,243,0)'
+
+                }], false),
+            }
+        },
+        data: becline1DataVal1
+
+    }]
+};
+oBecLine1.setOption(optionLine1);
+//bar1
+var oBecBar1 = echarts.init(document.getElementById('bec_bar1'));
+var optionBar1 = {
+    title: {
+        show: false
+    },
+    tooltip: {
+        formatter: '{a}<br>{b}:{c}（万笔）',
+    },
+    legend: {
+        show: false
+    },
+    grid: {
+        left: 0,
+        top: 50,
+        bottom:20,
+        right:20,
+        containLabel: true
+    },
+    xAxis: {
+        data: ['20160930', '20161031', '20161130', '20161231', '20170131', '20170228'],
+        interval: 1,
+        boundaryGap: 15,
+        axisLine: {
+            lineStyle: {
+                color: '#31cee9',
+                width: 2
+            }
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#31cee9',
+                fontSize: 16
+            },
+        },
+    },
+    yAxis: {
+        interval: 0.5,
+        minInterval: 2.5,
+        axisLine: {
+            lineStyle: {
+                color: '#31cee9',
+                width: 2
+            },
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#31cee9',
+                fontSize: 16
+            }
+        },
+        splitLine: {
+            show: true,
+            lineStyle: {
+                color: '#113768',
+                type: 'solid'
+            }
+        }
+    },
+    series: [{
+        name: '交易金额',
+        type: 'bar',
+        barWidth: 50,
+        itemStyle: {
+            normal: {
+                color: '#ffa800',
+                label: {
+                    show: true,
+                    position: 'top',
+                    offset:[0,-25],
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: 20
+                    }
+                }
+            }
+        },
+        data: [2.84, 2.67, 3.33, 2.78, 3.2, 2.68]
+    },{
+        name: '交易金额',
+        type: 'pictorialBar',
+        barGap: '-100%',
+        symbolPosition: 'end',
+        symbolSize: 50,
+        symbolOffset: [0, '-120%'],
+        data: [{
+            value: 2.84,
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: 2.67,
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: 3.33,
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: 2.78,
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: 3.2,
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: 2.68,
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }]
+ }]
+};
+oBecBar1.setOption(optionBar1);
+//bar2
+var oBecBar2 = echarts.init(document.getElementById('bec_bar2'));
+var optionBar2 = {
+    title: {
+        show: false
+    },
+    tooltip: {
+        formatter: '{a}<br>{b}:{c}（亿元）',
+    },
+    legend: {
+        show: false
+    },
+    grid: {
+        left: 0,
+        top: 50,
+        bottom:20,
+        right:20,
+        containLabel: true
+    },
+    xAxis: {
+        data: ['20160930', '20161031', '20161130', '20161231', '20170131', '20170228'],
+        interval: 1,
+        boundaryGap: 15,
+        axisLine: {
+            lineStyle: {
+                color: '#31cee9',
+                width: 2
+            }
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#31cee9',
+                fontSize: 16
+            },
+        },
+    },
+    yAxis: {
+        interval: 2,
+        minInterval: 10,
+        name: '（亿元）     ',
+        nameTextStyle: {
+            fontSize: 12
+        },
+        axisLine: {
+            lineStyle: {
+                color: '#31cee9',
+                width: 2
+            },
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#31cee9',
+                fontSize: 14
+            }
+        },
+        splitLine: {
+            show: true,
+            lineStyle: {
+                color: '#113768',
+                type: 'solid'
+            }
+        }
+    },
+    series: [{
+        name: '交易金额',
+        type: 'bar',
+        barWidth: 50,
+        itemStyle: {
+            normal: {
+                color: '#00d3c4',
+                label: {
+                    show: true,
+                    position: 'top',
+                    offset:[0,-25],
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: 20
+
+                    }
+                }
+            }
+        },
+        data: [3.46, 3.98, 3.55, 4.21, 12.62, 14.68]
+    },{
+        name: '交易金额',
+        type: 'pictorialBar',
+        barGap: '-100%',
+        symbolPosition: 'end',
+        symbolSize: 50,
+        symbolOffset: [0, '-120%'],
+        data: [{
+            value: 3.46,
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: 3.98,
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: 3.55,
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: 4.21,
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: 12.62,
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: 14.68,
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }]
+ }]
+};
+oBecBar2.setOption(optionBar2);
+</script>
+</html>

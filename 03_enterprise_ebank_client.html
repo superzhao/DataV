@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="src/css/reset.css">
+    <link rel="stylesheet" href="src/css/mian.css"></head>
+<body>
+<div class="header clearfix">
+    <div class="logo">
+        <img src="src/image/logo.png" alt="logo"></div>
+    <h1 class="title">企业网银数据视图</h1>
+    <div class="msg  clearfix">
+        <div class="msg_time">
+            <p id="showtime">&nbsp;&nbsp;&nbsp;</p>
+            <p id="showdate">&nbsp;&nbsp;&nbsp;</p>
+        </div>
+        <div class="msg_weather" style="padding-top: 20px;">
+                <iframe scrolling="no" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=48&color=%23FFFFFF&icon=1&num=2&site=17"></iframe>
+            </div>
+    </div>
+</div>
+<div class="blue_bar"></div>
+<div class="containner clearfix">
+    <div class="grwy_top  clearfix ">
+        <div  class=" e_p20  grwy_bg1 grwy_top_left  clearfix  e_relative">
+            <h2 class="chart_title_blue chart_title_bg1  e_pl20  maptitle_absolute" onclick="myrefresh(oEecMap1,optionMap1)">注册客户区域热度图</h2>
+            <div class="eec_visualMap"></div>
+            <div  class=" zckhqyrdt_map"   id="eec_map1"></div>
+            <h2 class="chart_title_blue e_tac   e_mt15" onclick="myrefresh(oEecBar1,optionBar1)">注册客户数 TOP8</h2>
+            <div  class=" zckhqyrdt_bar" id="eec_bar1"></div>
+        </div>
+        <div  class="e_pl20  e_pr20  e_pb20   grwy_bg2   e_ml10 grwy_top_right">
+            <h2 class="chart_title_blue chart_title_bg6  e_tac" onclick="myrefresh(oEecLine1,optionLine1)">注册客户数累计图（千万户）</h2>
+            <div class="zckhljt_bar"  id="eec_line1"></div>
+        </div>
+    </div>
+    <div class="grwy_bottom  clearfix e_mt10 ">
+        <div  class=" e_pl20  e_pr20  e_pb20  grwy_bg3  grwy_bottom_left">
+            <h2 class="chart_title_blue chart_title_bg5  e_pl20  e_tac" onclick="myrefresh(oEecBar2,optionBar2)">交易笔数月度图（万笔）</h2>
+            <div  class=" jybsydt_bar"  id="eec_bar2" ></div>
+        </div>
+        <div  class="e_pl20  e_pr20  e_pb20   grwy_bg3   e_ml10 grwy_bottom_right">
+            <h2 class="chart_title_blue chart_title_bg5  e_tac" onclick="myrefresh(oEecBar3,optionBar3)">交易金额月度图（亿元）</h2>
+            <div class=" jyjeydt_bar"  id="eec_bar3"></div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="src/js/echarts.js"></script>
+<script src="src/js/china.js"></script>
+<script src="src/js/jquery v1.11.1min.js"></script>
+<script src="src/js/mian.js"></script>
+<script>
+function myrefresh(obj, chart) {
+    obj.clear();
+    obj.setOption(chart);
+}
+//map1
+var oEecMap1 = echarts.init(document.getElementById('eec_map1'));
+var eecmap1DataVal = [{
+    name: '北京',
+    value: 29,
+    coord: [116.46, 39.92]
+}, {
+    name: '天津',
+    value: 18,
+    coord: [117.4219, 39.4189]
+}, {
+    name: '上海',
+    value: 12,
+    coord: [121.4648, 31.2891]
+}, {
+    name: '重庆',
+    value: 19,
+    coord: [107.7539, 30.1904]
+}, {
+    name: '河北',
+    value: 14,
+    coord: [115.4004,37.9688]
+}, {
+    name: '河南',
+    value: 25,
+    coord: [113.4668, 33.8818]
+}, {
+    name: '云南',
+    value: 35,
+    coord: [101.8652, 25.1807]
+}, {
+    name: '辽宁',
+    value: 30,
+    coord: [122.3438, 41.0889]
+}, {
+    name: '黑龙江',
+    value: 20,
+    coord: [128.1445, 48.5156]
+}, {
+    name: '湖南',
+    value: 45,
+    coord: [111.5332, 27.3779]
+}, {
+    name: '安徽',
+    value: 52,
+    coord: [117.2461, 32.0361]
+}, {
+    name: '山东',
+    value: 40,
+    coord: [118.7402, 36.4307]
+}, {
+    name: '新疆',
+    value: 10,
+    coord: [84.9023, 41.748]
+}, {
+    name: '江苏',
+    value: 50,
+    coord: [120.0586, 32.915]
+}, {
+    name: '浙江',
+    value: 13,
+    coord: [120.498, 29.0918]
+}, {
+    name: '江西',
+    value: 40,
+    coord: [116.0156, 27.29]
+}, {
+    name: '湖北',
+    value: 52,
+    coord: [112.2363, 31.1572]
+}, {
+    name: '广西',
+    value: 23,
+    coord: [108.2813, 23.6426]
+}, {
+    name: '甘肃',
+    value: 32,
+    coord: [95.7129, 40.166]
+}, {
+    name: '山西',
+    value: 10,
+    coord: [112.4121, 37.6611]
+}, {
+    name: '内蒙古',
+    value: 8,
+    coord: [117.5977, 44.3408]
+}, {
+    name: '陕西',
+    value: 3,
+    coord: [109.5996, 35.6396]
+}, {
+    name: '吉林',
+    value: 11,
+    coord: [126.4746, 43.5938]
+}, {
+    name: '福建',
+    value: 9,
+    coord: [118.3008, 25.9277]
+}, {
+    name: '贵州',
+    value: 2,
+    coord: [106.6113, 26.9385]
+}, {
+    name: '广东',
+    value: 20,
+    coord: [113.4668, 22.8076]
+}, {
+    name: '青海',
+    value: 49,
+    coord: [96.2402, 35.4199]
+}, {
+    name: '西藏',
+    value: 21,
+    coord: [88.7695, 31.6846]
+}, {
+    name: '四川',
+    value: 15,
+    coord: [102.9199, 30.1904]
+}, {
+    name: '宁夏',
+    value: 11,
+    coord: [105.9961, 37.3096]
+}, {
+    name: '海南',
+    value: 40,
+    coord: [109.9512, 19.2041]
+}, {
+    name: '台湾',
+    value: 10,
+    coord: [121.0254,23.5986]
+}, {
+    name: '香港',
+    value: 50,
+    coord: [114.2784, 22.3057]
+}, {
+    name: '澳门',
+    value: 9,
+    coord: [113.5547,22.1484]
+}, {
+    name: '南海诸岛',
+    value: 0,
+    itemStyle: {
+        normal: {
+            opacity: 0,
+            label: {
+                show: false
+            }
+        }
+    },
+    coord: [113.5715, 22.1583]
+}];
+function sortvalue(a, b) {
+    return a.value - b.value;
+}
+eecmap1DataVal.sort(sortvalue);
+var eecmap1Mpoint = [{
+    name: '北京',
+    value: 29,
+    coord: [116.46, 39.92]
+}];
+var i = 34;
+var optionMap1 = {
+    title: {
+        show: false
+    },
+    grid: {
+        left: 0,
+        top: 0,
+        right: 0,
+        bottom: 0,
+        containLabel: true
+    },
+    tooltip: {
+        trigger: 'item',
+        formatter: '{b}:{c}万户'
+    },
+    legend: {
+        show: false
+    },
+    visualMap: {
+        show: false,
+        min: 0,
+        max: 60,
+        right: 107,
+        bottom: 25,
+        itemWidth: 21,
+        itemHeight: 158,
+        calculable: true,
+        inRange: {
+            color: ['#4e88ff', '#eef500', '#ff4800', '#de0303']
+        },
+        textStyle: {
+            color: 'rgba(0,0,0,0)',
+            fontSize: 12
+        },
+        textGap: 25
+    },
+    toolbox: {
+        show: false
+    },
+    series: [{
+        name: '注册客户数',
+        type: 'map',
+        mapType: 'china',
+        roam: false,
+        aspectScale: 0.8,
+        showLegendSymbol: false,
+        layoutCenter: ['45%', '50%'],
+        layoutSize: 550,
+        label: {
+            normal: {
+                show: false
+            },
+            emphasis: {
+                show: false
+            }
+        },
+        markPoint: {
+            symbol: 'image://src/image/map_tooltip_blackbg.png',
+           symbolSize:[120, 50],
+           symbolOffset:[0, '-25px'],
+            label: {
+                normal: {
+                    position: 'inside',
+                    formatter: '{b}:{c}万户'
+                }
+            },
+            data: eecmap1Mpoint
+        },
+        data: eecmap1DataVal
+    }]
+};
+oEecMap1.setOption(optionMap1);
+setInterval(function() {
+    var conData = eecmap1DataVal[i];
+    console.log(i);
+    eecmap1Mpoint[0] = conData;  
+    oEecMap1.setOption(optionMap1);
+    i==1?i=34:i--;
+}, 2000);
+//bar1
+var oEecBar1 = echarts.init(document.getElementById('eec_bar1'));
+var eecbar1YaxisVal = ['河南', '北京', '山西', '山东', '四川', '广东', ' 江苏', ' 浙江'];
+var eecbar1DataVal = [18, 20, 22, 21, 23, 30, 41, 51];
+var optionBar1 = {
+    title: {
+        show: false
+    },
+    tooltip: {
+        trigger: "axis",
+        show: false
+    },
+    grid: {
+        top: 10,
+        left: 100,
+        right: 78,
+        bottom: 10
+    },
+    legend: {
+        show: false
+    },
+    calculable: true,
+    xAxis: [{
+        type: "value",
+        boundaryGap: [0, 0],
+        show: false,
+        axisLine: {
+            show: false
+        },
+        splitLine: {
+            show: false
+        },
+        axisTick: {
+            show: false
+        }
+
+    }],
+    yAxis: [{
+        type: "category",
+        data: [{
+            value: "8、" + eecbar1YaxisVal[0],
+            textStyle: {
+                color: '#3e84d1',
+                fontSize: 20,
+                fontWeight: 'bold'
+            }
+        }, {
+            value: "7、" + eecbar1YaxisVal[1],
+            textStyle: {
+                color: '#3e84d1',
+                fontSize: 20,
+                fontWeight: 'bold'
+            }
+        }, {
+            value: "6、" + eecbar1YaxisVal[2],
+            textStyle: {
+                color: '#3e84d1',
+                fontSize: 20,
+                fontWeight: 'bold'
+            }
+        }, {
+            value: "5、" + eecbar1YaxisVal[3],
+            textStyle: {
+                color: '#3e84d1',
+                fontSize: 20,
+                fontWeight: 'bold'
+            }
+        }, {
+            value: "4、" + eecbar1YaxisVal[4],
+            textStyle: {
+                color: '#3e84d1',
+                fontSize: 20,
+                fontWeight: 'bold'
+            }
+        }, {
+            value: "3、" + eecbar1YaxisVal[5],
+            textStyle: {
+                color: '#ffa800',
+                fontSize: 20,
+                fontWeight: 'bold'
+            }
+        }, {
+            value: "2、" + eecbar1YaxisVal[6],
+            textStyle: {
+                color: '#ff7e00',
+                fontSize: 20,
+                fontWeight: 'bold'
+            }
+        }, {
+            value: "1、" + eecbar1YaxisVal[7],
+            textStyle: {
+                color: '#ff4800',
+                fontSize: 20,
+                fontWeight: 'bold'
+            }
+        }],
+        axisLine: {
+            show: false
+        },
+        splitLine: {
+            show: false
+        },
+        axisTick: {
+            show: false
+        },
+        axisLabel: {
+            margin: 22
+        }
+    }, {
+        type: "category",
+        data: [{
+                value: eecbar1DataVal[0],
+                textStyle: {
+                    color: '#13889a'
+                }
+            }, {
+                value: eecbar1DataVal[1],
+                textStyle: {
+                    color: '#13889a'
+                }
+            }, {
+                value: eecbar1DataVal[2],
+                textStyle: {
+                    color: '#13889a'
+                }
+            }, {
+                value: eecbar1DataVal[3],
+                textStyle: {
+                    color: '#13889a'
+                }
+            }, {
+                value: eecbar1DataVal[4],
+                textStyle: {
+                    color: '#13889a'
+                }
+            },
+            eecbar1DataVal[5], eecbar1DataVal[6], eecbar1DataVal[7]
+        ],
+        axisLine: {
+            show: false
+        },
+        splitLine: {
+            show: false
+        },
+        axisTick: {
+            show: false
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#20f7ff',
+                fontSize: 20
+            },
+            margin: -4,
+            formatter: '{value} 万户'
+        }
+    }],
+    series: [{
+        name: "注册客户数 ",
+        type: "bar",
+        barWidth: 22,
+        z: 10,
+        tooltip: {
+            show: false
+        },
+        data: eecbar1DataVal,
+        itemStyle: {
+            normal: {
+                color: function(params) {
+                    // build a color map as your need.
+                    var colorList = [
+                        '#3e83d1', '#3e83d1', '#3e83d1', '#3e83d1', '#3e83d1', '#ffa800', '#ff7e00', '#ff4800'
+                    ];
+                    return colorList[params.dataIndex]
+                },
+                shadowBlur: 6,
+                shadowColor: 'rgba(255, 255, 255, 1)'
+            }
+        },
+        markPoint: {
+            data: [{
+                label: {
+                    normal: {
+                        show: false
+                    }
+                },
+                x: 11,
+                y: 35,
+                symbol: 'image://src/image/icon_top1.png',
+                symbolSize: [25, 28]
+            }, {
+                label: {
+                    normal: {
+                        show: false
+                    }
+                },
+                x: 11,
+                y: 80,
+                symbol: 'image://src/image/icon_top2.png',
+                symbolSize: [25, 28]
+            }, {
+                label: {
+                    normal: {
+                        show: false
+                    }
+                },
+                x: 11,
+                y: 125,
+                symbol: 'image://src/image/icon_top3.png',
+                symbolSize: [25, 28]
+            }]
+        }
+
+    }, {
+        type: "bar",
+        barWidth: 22,
+        silent: true,
+        itemStyle: {
+            normal: {
+                color: 'rgba(78,165,255,0.2)'
+            }
+        },
+        tooltip: {
+            show: false
+        },
+        barGap: '-100%',
+        data: [eecbar1DataVal[7], eecbar1DataVal[7], eecbar1DataVal[7], eecbar1DataVal[7], eecbar1DataVal[7], eecbar1DataVal[7], eecbar1DataVal[7]]
+    }]
+};
+oEecBar1.setOption(optionBar1);
+//line1
+var oEecLine1 = echarts.init(document.getElementById('eec_line1'));
+var eecline1DataVal = [416.611, 406.723, 476.866, 477.111, 497.255, 417.844];
+var eecline1XaxisVal = ['20160930', '20161031', '20161130', '20161231', '20170131', '20170228'];
+var optionLine1 = {
+    grid: {
+        left: 0,
+        top: 50,
+        bottom: 0,
+        right: 0,
+        containLabel: true
+    },
+    tooltip: {
+        show: true,
+        trigger: 'axis',
+        backgroundColor: '#384157',
+        borderColor: '#384157',
+        borderWidth: 1,
+        formatter: '{a}<br>{b}:{c}（千万户）',
+        extraCssText: 'box-shadow: 0 0 5px rgba(0, 0, 0, 1)',
+        textStyle: {
+            fontSize: 20
+        }
+    },
+    legend: {
+        show: false
+    },
+    title: {
+        show: false,
+        textStyle: {
+            color: '#5c6076'
+        }
+    },
+    xAxis: {
+        boundaryGap: 10,
+        axisLine: {
+            lineStyle: {
+                color: '#31cee9',
+                width: 2
+            }
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#31cee9',
+                fontSize: 14
+            },
+        },
+        data: eecline1XaxisVal
+    },
+    yAxis: {
+        interval: 100,
+        minInterval: 300,
+        axisLine: {
+            lineStyle: {
+                color: '#31cee9',
+                width: 2
+            },
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#31cee9',
+                fontSize: 14
+            }
+        },
+        splitLine: {
+            show: true,
+            lineStyle: {
+                color: '#113768'
+            }
+        }
+    },
+
+    series: [{
+        type: 'bar',
+        name: '注册客户数',
+        tooltip: {
+            show: false
+        },
+        animation: true,
+        barWidth: 0.02,
+        hoverAnimation: false,
+        itemStyle: {
+            normal: {
+                color: '#f17a52',
+                opacity: 0.6,
+                label: {
+                    show: false
+                },
+                borderWidth: 2,
+                borderColor: '#177fa2',
+                borderType: 'dashed'
+            }
+        },
+        data: eecline1DataVal
+    }, {
+        type: 'line',
+        name: '注册客户数',
+        smooth: false,
+        symbolSize: 10,
+        animation: true,
+        lineWidth: 2,
+        hoverAnimation: false,
+        symbol: 'circle',
+        itemStyle: {
+            normal: {
+                color: '#31cee9',
+                shadowBlur: 10,
+                label: {
+                    show: true,
+                    position: 'top',
+                    textStyle: {
+                        color: '#31cee9',
+                        fontSize: 20
+
+                    }
+                }
+            }
+        },
+        areaStyle: {
+            normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: 'rgba(25,158,243,0.6)'
+                }, {
+                    offset: 1,
+                    color: 'rgba(25,158,243,0)'
+
+                }], false),
+            }
+        },
+        data: eecline1DataVal
+    }]
+};
+oEecLine1.setOption(optionLine1);
+//bar2
+var oEecBar2 = echarts.init(document.getElementById('eec_bar2'));
+var eecbar2XaxisVal = ['20160930', '20161031', '20161130', '20161231', '20170131', '20170228'];
+var eecbar2DataVal = [5.84, 5.67, 5.33, 5.78, 6.2, 4.68];
+var optionBar2 = {
+    grid: {
+        left: 0,
+        top: 50,
+        bottom: 15,
+        right: 20,
+        containLabel: true
+    },
+    tooltip: {
+        formatter: '{a}<br>{b}:{c}（万笔）',
+    },
+    xAxis: {
+        data: eecbar2XaxisVal,
+        interval: 1,
+        boundaryGap: 15,
+        axisLine: {
+            lineStyle: {
+                color: '#31cee9',
+            }
+        },
+        axisLabel: {
+            textStyle: {
+                color: '##31cee9',
+                fontSize: 16
+            },
+        },
+    },
+    yAxis: {
+        interval: 1,
+        minInterval: 5,
+        axisLine: {
+            lineStyle: {
+                color: '#31cee9'
+            },
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#31cee9',
+                fontSize: 16
+            }
+        },
+        splitLine: {
+            show: true,
+            lineStyle: {
+                color: '#113768',
+                type: 'solid'
+            }
+        }
+    },
+    series: [{
+        name: '交易金额',
+        type: 'bar',
+        barWidth: 50,
+        itemStyle: {
+            normal: {
+                color: '#ffa800',
+                label: {
+                    show: true,
+                    position: 'top',
+                    offset: [0, -25],
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: 20
+                    }
+                }
+            }
+        },
+        z: 10,
+        data: eecbar2DataVal
+    }, {
+        name: '交易金额',
+        type: 'pictorialBar',
+        barGap: '-100%',
+        symbolPosition: 'end',
+        symbolSize: 50,
+        symbolOffset: [0, '-120%'],
+        data: [{
+            value: eecbar2DataVal[0],
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: eecbar2DataVal[1],
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: eecbar2DataVal[2],
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: eecbar2DataVal[3],
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: eecbar2DataVal[4],
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: eecbar2DataVal[5],
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }]
+    }]
+};
+oEecBar2.setOption(optionBar2);
+//bar3
+var oEecBar3 = echarts.init(document.getElementById('eec_bar3'));
+var eecbar3XaxisVal = ['20160930', '20161031', '20161130', '20161231', '20170131', '20170228'];
+var eecbar3DataVal = [3.46, 3.98, 3.55, 4.21, 12.62, 14.68];
+var optionBar3 = {
+    grid: {
+        left: 0,
+        top: 50,
+        bottom: 15,
+        right: 20,
+        containLabel: true
+    },
+    title: {
+        show: false
+    },
+    tooltip: {
+        formatter: '{a}<br>{b}:{c}（亿元）',
+    },
+    legend: {
+        show: false
+    },
+    xAxis: {
+        data: eecbar3XaxisVal,
+        interval: 1,
+        boundaryGap: 15,
+        axisLine: {
+            lineStyle: {
+                color: '#31cee9',
+            }
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#31cee9',
+                fontSize: 16
+            },
+        },
+    },
+    yAxis: {
+        interval: 2,
+        minInterval: 2,
+        splitNumber: 20,
+        name: "（亿元）",
+        nameLocation: "end",
+        axisLine: {
+            lineStyle: {
+                color: '#31cee9'
+            },
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#31cee9',
+                fontSize: 16
+            }
+        },
+        splitLine: {
+            show: true,
+            lineStyle: {
+                color: '#113768',
+                type: 'solid'
+            }
+        }
+    },
+    series: [{
+        name: '交易金额',
+        type: 'bar',
+        barWidth: 50,
+        itemStyle: {
+            normal: {
+                color: '#00d3c4',
+                label: {
+                    show: true,
+                    position: 'top',
+                    offset: [0, -25],
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: 20
+
+                    }
+                }
+            }
+        },
+        data: eecbar3DataVal
+    }, {
+        name: '交易金额',
+        type: 'pictorialBar',
+        barGap: '-100%',
+        symbolPosition: 'end',
+        symbolSize: 50,
+        symbolOffset: [0, '-120%'],
+        data: [{
+            value: eecbar3DataVal[0],
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: eecbar3DataVal[1],
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: eecbar3DataVal[2],
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: eecbar3DataVal[3],
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: eecbar3DataVal[4],
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: eecbar3DataVal[5],
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }]
+    }]
+};
+oEecBar3.setOption(optionBar3);
+</script>
+</html>

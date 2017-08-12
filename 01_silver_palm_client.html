@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="src/css/reset.css">
+    <link rel="stylesheet" href="src/css/mian.css">
+    <style type="text/css">
+    	#mobile4 .wtleft{
+    		display: none!important;
+    	}
+    </style>
+</head>
+<body>
+    <div class="header clearfix">
+        <div class="logo">
+            <img src="src/image/logo.png" alt="logo">
+        </div>
+        <h1 class="title">掌上银行数据视图</h1>
+        <div class="msg  clearfix">
+            <div class="msg_time">
+                <p id="showtime">&nbsp;&nbsp;&nbsp;</p>
+                <p id="showdate">&nbsp;&nbsp;&nbsp;</p>
+            </div>
+            <div class="msg_weather" style="padding-top: 20px;">
+                <iframe scrolling="no" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=48&color=%23FFFFFF&icon=1&num=2&site=17"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="blue_bar"></div>
+    <div class="containner clearfix">
+        <div class="e_p20  zykh_left  zykh_bg1 e_relative">
+            <h2 class="chart_title_blue chart_title_bg1  e_pl20  maptitle_absolute" onclick="myrefresh(oSpcMap1,optionMap1)">注册客户区域热度图</h2>
+            <div class="spc_visualMap"></div>
+            <div  class="zckhqyrdt_map" id="spc_map1"></div>
+            <h2 class="e_tac chart_title_blue" onclick="myrefresh(oSpcBar1,optionBar1)">注册客户数 TOP6</h2>
+            <div class="zckhs_bar" id="spc_bar1" ></div>
+        </div>
+        <div class="zykh_mid">
+            <div  class="num_view_blue">
+                <h2 class="chart_title_white">
+                    掌银<span>10</span>月活跃客户数
+                </h2>
+                <p class="num">
+                    <span class="e_bg_0d2148  e_fz_72">4</span>
+                    <span class="e_bg_0d2148  e_fz_72">8</span>
+                    <span class="e_fz_38">,</span>
+                    <span class="e_bg_0d2148  e_fz_72">6</span>
+                    <span class="e_bg_0d2148  e_fz_72">3</span>
+                    <span class="e_bg_0d2148  e_fz_72">3</span>
+                    <span class="e_fz_38">,</span>
+                    <span class="e_bg_0d2148  e_fz_72">7</span>
+                    <span class="e_bg_0d2148  e_fz_72">1</span>
+                    <span class="e_bg_0d2148  e_fz_72">8</span>
+                    <span class="e_color_white  e_fz_28">户</span>
+                </p>
+            </div>
+            <div  class="num_view_blue   e_p20  e_mt10">
+                <h2 class="chart_title_white">
+                    掌银<span>10</span>月动户率
+                </h2>
+                <p class="num_rate e_fz_75  e_tac ">
+                    <span>22.18</span>
+                    <span  class="e_color_white  e_fz_28 e_ml_10">%</span>
+                </p>
+                <p  class="e_color_white  e_fz_20  last_rate">
+                    <span>8</span>月份动户率: <strong>15.85%</strong> <i>|</i>
+                    <span>9</span>月份动户率: <strong>19.61%</strong>
+                </p>
+            </div>
+            <div class="zykh_bg2 e_mt20 ">
+                <h2 class="chart_title_blue chart_title_bg2 e_tac" onclick="myrefresh(oSpcLine1,optionLine1)">注册客户数累计图（千万户）</h2>
+                <div class="zckhsljt_line"  id="spc_line1" ></div>
+            </div>
+        </div>
+        <div class="zykh_right">
+            <div class="zykh_bg3">
+                <h2 class="chart_title_blue chart_title_bg3  e_tac" onclick="myrefresh(oSpcBar2,optionBar2)">交易笔数月度图（万笔）</h2>
+                <div class="jybsydt_bar" id="spc_bar2" ></div>
+            </div>
+            <div class="zykh_bg4 e_mt10 ">
+                <h2 class="chart_title_blue chart_title_bg3  e_tac" onclick="myrefresh(oSpcBar3,optionBar3)">交易金额月度图（亿元）</h2>
+                <div class="jyjeydt_bar"  id="spc_bar3" ></div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="src/js/echarts.js"></script>
+<script src="src/js/china.js"></script>
+<script src="src/js/jquery v1.11.1min.js"></script>
+<script src="src/js/mian.js"></script>
+<script>
+function myrefresh(obj, chart) {
+    obj.clear();
+    obj.setOption(chart);
+}
+//map1
+var oSpcMap1 = echarts.init(document.getElementById('spc_map1'));
+var spcmap1DataVal = [{
+    name: '北京',
+    value: 298,
+    coord: [116.46, 39.92]
+}, {
+    name: '天津',
+    value: 1800,
+    coord: [117.4219, 39.4189]
+}, {
+    name: '上海',
+    value: 1200,
+    coord: [121.4648, 31.2891]
+}, {
+    name: '重庆',
+    value: 900,
+    coord: [107.7539, 30.1904]
+}, {
+    name: '河北',
+    value: 400,
+    coord: [115.4004,37.9688]
+}, {
+    name: '河南',
+    value: 500,
+    coord: [113.4668, 33.8818]
+}, {
+    name: '云南',
+    value: 75,
+    coord: [101.8652, 25.1807]
+}, {
+    name: '辽宁',
+    value: 300,
+    coord: [122.3438, 41.0889]
+}, {
+    name: '黑龙江',
+    value: 200,
+    coord: [128.1445, 48.5156]
+}, {
+    name: '湖南',
+    value: 600,
+    coord: [111.5332, 27.3779]
+}, {
+    name: '安徽',
+    value: 521,
+    coord: [117.2461, 32.0361]
+}, {
+    name: '山东',
+    value: 400,
+    coord: [118.7402, 36.4307]
+}, {
+    name: '新疆',
+    value: 100,
+    coord: [84.9023, 41.748]
+}, {
+    name: '江苏',
+    value: 1700,
+    coord: [120.0586, 32.915]
+}, {
+    name: '浙江',
+    value: 1300,
+    coord: [120.498, 29.0918]
+}, {
+    name: '江西',
+    value: 400,
+    coord: [116.0156, 27.29]
+}, {
+    name: '湖北',
+    value: 671,
+    coord: [112.2363, 31.1572]
+}, {
+    name: '广西',
+    value: 0,
+    coord: [108.2813, 23.6426]
+}, {
+    name: '甘肃',
+    value: 325,
+    coord: [95.7129, 40.166]
+}, {
+    name: '山西',
+    value: 800,
+    coord: [112.4121, 37.6611]
+}, {
+    name: '内蒙古',
+    value: 230,
+    coord: [117.5977, 44.3408]
+}, {
+    name: '陕西',
+    value: 330,
+    coord: [109.5996, 35.6396]
+}, {
+    name: '吉林',
+    value: 110,
+    coord: [126.4746, 43.5938]
+}, {
+    name: '福建',
+    value: 900,
+    coord: [118.3008, 25.9277]
+}, {
+    name: '贵州',
+    value: 200,
+    coord: [106.6113, 26.9385]
+}, {
+    name: '广东',
+    value: 2000,
+    coord: [113.4668, 22.8076]
+}, {
+    name: '青海',
+    value: 492,
+    coord: [96.2402, 35.4199]
+}, {
+    name: '西藏',
+    value: 219,
+    coord: [88.7695, 31.6846]
+}, {
+    name: '四川',
+    value: 1500,
+    coord: [102.9199, 30.1904]
+}, {
+    name: '宁夏',
+    value: 110,
+    coord: [105.9961, 37.3096]
+}, {
+    name: '海南',
+    value: 400,
+    coord: [109.9512, 19.2041]
+}, {
+    name: '台湾',
+    value: 100,
+    coord: [121.0254,23.5986]
+}, {
+    name: '香港',
+    value: 500,
+    coord: [114.2784, 22.3057]
+}, {
+    name: '澳门',
+    value: 900,
+    coord: [113.5547,22.1484]
+}, {
+    name: '南海诸岛',
+    value: -1,
+    itemStyle: {
+        normal: {
+            opacity: 0,
+            label: {
+                show: false
+            }
+        }
+    },
+    coord: [113.5715, 22.1583]
+}];
+function sortvalue(a, b) {
+    return a.value - b.value;
+}
+spcmap1DataVal.sort(sortvalue);
+var spcmap1Mpoint = [{
+    name: '北京',
+    value: 298,
+    coord: [116.46, 39.92]
+}];
+var i = 34;
+var optionMap1 = {
+    title: {
+        show: false
+    },
+    grid: {
+        right: 0,
+        top: 0,
+        containLabel: true
+    },
+    tooltip: {
+        trigger: 'item',
+        formatter: '{b}:{c}万户',
+        /* triggerOn:'none'*/
+    },
+    legend: {
+        show: false,
+    },
+    visualMap: {
+        show: false,
+        min: 0,
+        max: 2500,
+        itemWidth: 21,
+        itemHeight: 132,
+        bottom: 50,
+        right: 5,
+        calculable: true,
+        inRange: {
+            color: ['#4e88ff', '#eef500', '#ff4800', '#de0303']
+        },
+        textStyle: {
+            color: 'rgba(0,0,0,0)',
+            fontSize: 12
+        },
+        textGap: 25
+    },
+    toolbox: {
+        show: false
+    },
+    series: [{
+        name: '注册客户数',
+        type: 'map',
+        mapType: 'china',
+        roam: false,
+        layoutCenter: ['50%', '50%'],
+        layoutSize: 600,
+        showLegendSymbol: false,
+        label: {
+            normal: {
+                show: false
+            },
+            emphasis: {
+                show: false
+            }
+        },
+      markPoint: {
+        symbol: 'image://src/image/map_tooltip_blackbg.png',
+           symbolSize:[120, 50],
+           symbolOffset:[0, '-25px'],
+            label: {
+                normal: {
+                    position: 'inside',
+                    formatter: '{b}:{c}万户'
+                }
+            },
+            data: spcmap1Mpoint
+        },
+        data: spcmap1DataVal
+    }]
+};
+oSpcMap1.setOption(optionMap1);
+setInterval(function() {
+    var conData = spcmap1DataVal[i];
+    console.log(i);
+    spcmap1Mpoint[0] = conData;  
+    oSpcMap1.setOption(optionMap1);
+    i==1?i=34:i--;
+}, 2000);
+
+//bar1
+var oSpcBar1 = echarts.init(document.getElementById('spc_bar1'));
+var spcbar1YaxisVal = ['山东', '四川', '广东', '江苏', '浙江'];
+var spcbar1DataVal = [1000, 1470, 1700, 1800, 2270];
+var optionBar1 = {
+    title: {
+        show: false
+    },
+    tooltip: {
+        trigger: "axis",
+        show: false
+    },
+    grid: {
+        top: 10,
+        left: 175,
+        right: 120,
+        bottom: 60
+    },
+    legend: {
+        show: false
+    },
+    calculable: true,
+    xAxis: [{
+        type: "value",
+        boundaryGap: [0, 0],
+        show: false,
+        axisLine: {
+            show: false
+        },
+        splitLine: {
+            show: false
+        },
+        axisTick: {
+            show: true
+        }
+
+    }],
+    yAxis: [{
+        type: "category",
+        data: [{
+            value: "5、" + spcbar1YaxisVal[0],
+            textStyle: {
+                color: '#3e84d1',
+                fontSize: 20
+            }
+        }, {
+            value: "4、" + spcbar1YaxisVal[1],
+            textStyle: {
+                color: '#3e84d1',
+                fontSize: 20
+            }
+        }, {
+            value: "3、" + spcbar1YaxisVal[2],
+            textStyle: {
+                color: '#ffa800',
+                fontSize: 20,
+                fontWeight: 'bold'
+            }
+        }, {
+            value: "2、" + spcbar1YaxisVal[3],
+            textStyle: {
+                color: '#ff7e00',
+                fontSize: 20,
+                fontWeight: 'bold'
+            }
+        }, {
+            value: "1、" + spcbar1YaxisVal[4],
+            textStyle: {
+                color: '#ff4800',
+                fontSize: 19,
+                fontWeight: 'bold'
+            }
+        }],
+        axisLine: {
+            show: false
+        },
+        splitLine: {
+            show: false
+        },
+        axisTick: {
+            show: false
+        }
+    }, {
+        type: "category",
+        data: [{
+                value: spcbar1DataVal[0],
+                textStyle: {
+                    color: '#13889a'
+                }
+            }, {
+                value: spcbar1DataVal[1],
+                textStyle: {
+                    color: '#13889a'
+                }
+            },
+            spcbar1DataVal[2], spcbar1DataVal[3], spcbar1DataVal[4]
+        ],
+        axisLine: {
+            show: false
+        },
+        splitLine: {
+            show: false
+        },
+        axisTick: {
+            show: false
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#20f7ff',
+                fontSize: 19
+            },
+            margin: -15,
+            formatter: '{value} 万户'
+        }
+    }],
+    series: [{
+        name: "注册客户数 ",
+        type: "bar",
+        barWidth: 22,
+        z: 10,
+        tooltip: {
+            show: false
+        },
+        itemStyle: {
+            normal: {
+                color: function(params) {
+                    var colorList = [
+                        '#3e83d1', '#3e83d1', '#ffa800', '#ff7e00', '#ff4800'
+                    ];
+                    return colorList[params.dataIndex]
+                },
+                shadowBlur: 6,
+                shadowColor: 'rgba(255, 255, 255, 1)'
+            }
+        },
+        markPoint: {
+            data: [{
+                label: {
+                    normal: {
+                        show: false
+                    }
+                },
+                x: 105,
+                y: 40,
+                symbol: 'image://src/image/icon_top1.png',
+                symbolSize: [25, 28]
+            }, {
+                label: {
+                    normal: {
+                        show: false
+                    }
+                },
+                x: 105,
+                y: 100,
+                symbol: 'image://src/image/icon_top2.png',
+                symbolSize: [25, 28]
+            }, {
+                label: {
+                    normal: {
+                        show: false
+                    }
+                },
+                x: 105,
+                y: 160,
+                symbol: 'image://src/image/icon_top3.png',
+                symbolSize: [25, 28]
+            }]
+        },
+        data: spcbar1DataVal
+    }, {
+        type: "bar",
+        barWidth: 22,
+        silent: true,
+        itemStyle: {
+            normal: {
+                color: 'rgba(78,165,255,0.2)'
+            }
+        },
+        tooltip: {
+            show: false
+        },
+        barGap: '-100%',
+        data: [spcbar1DataVal[4], spcbar1DataVal[4], spcbar1DataVal[4], spcbar1DataVal[4], spcbar1DataVal[4]]
+    }]
+};
+oSpcBar1.setOption(optionBar1);
+//line1
+var oSpcLine1 = echarts.init(document.getElementById('spc_line1'));
+var spcline1XaxisVal = ['20160930', '20161031', '20161130', '20161231', '20170131', '20170228'];
+var spcline1DataVal = [16.611, 16.723, 16.866, 17.111, 17.255, 17.844];
+var optionLine1 = {
+    grid: {
+        top: '10%',
+        right: 10,
+        bottom: 40,
+        left: 10,
+        containLabel: true
+    },
+    title: {
+        show: false,
+        textStyle: {
+            color: '#5c6076'
+        }
+    },
+    legend: {
+        show: false
+    },
+    tooltip: {
+        show: true,
+        trigger: 'axis',
+        backgroundColor: '#384157',
+        borderColor: '#384157',
+        borderWidth: 1,
+        formatter: '{a}<br>{b}:{c}（千万户）',
+        extraCssText: 'box-shadow: 0 0 5px rgba(0, 0, 0, 1)',
+        textStyle: {
+            fontSize: 20
+        }
+    },
+    xAxis: {
+        boundaryGap: 10,
+        axisLine: {
+            lineStyle: {
+                color: '#31cee9',
+                width: 2
+            }
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#06bcff',
+                fontSize: 12
+            },
+            rotate: 30
+        },
+        data: spcline1XaxisVal
+    },
+    yAxis: {
+        interval: 5,
+        minInterval: 5,
+        axisLine: {
+            lineStyle: {
+                color: '#31cee9',
+                width: 2
+            },
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#06bcff',
+                fontSize: 14
+            }
+        },
+        splitLine: {
+            show: true,
+            lineStyle: {
+                color: '#113768'
+            }
+        }
+    },
+    series: [{
+        type: 'bar',
+        name: '注册客户数',
+        tooltip: {
+            show: false
+        },
+        animation: true,
+        barWidth: 0.02,
+        hoverAnimation: false,
+        itemStyle: {
+            normal: {
+                color: '#f17a52',
+                opacity: 0.6,
+                label: {
+                    show: false
+                },
+                borderWidth: 2,
+                borderColor: '#30cee9',
+                borderType: 'dashed'
+            }
+        },
+        data: spcline1DataVal
+    }, {
+        type: 'line',
+        name: '注册客户数',
+        smooth: true,
+        symbolSize: 10,
+        animation: true,
+        lineWidth: 2,
+        hoverAnimation: false,
+        symbol: 'circle',
+        itemStyle: {
+            normal: {
+                color: '#30cee9',
+                shadowBlur: 40,
+                label: {
+                    show: true,
+                    position: 'top',
+                    textStyle: {
+                        color: '#30cee9',
+                        fontSize: 18
+
+                    }
+                }
+            }
+        },
+        areaStyle: {
+            normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: 'rgba(25,158,243,0.6)'
+                }, {
+                    offset: 1,
+                    color: 'rgba(25,158,243,0)'
+
+                }], false),
+            }
+        },
+        data: spcline1DataVal
+    }]
+};
+oSpcLine1.setOption(optionLine1);
+//bar2
+var oSpcBar2 = echarts.init(document.getElementById('spc_bar2'));
+var spcbar2XaxisVal = ['20160930', '20161031', '20161130', '20161231', '20170131', '20170228'];
+var spcbar2DataVal = [3.15, 4.02, 4.33, 4.78, 5.2, 4.68];
+var optionBar2 = {
+    grid: {
+        top: 40,
+        right: 20,
+        bottom: 40,
+        left: 23,
+        containLabel: true
+    },
+    title: {
+        show: false
+    },
+    tooltip: {
+        formatter: '{a}<br>{b}:{c}（万笔）',
+    },
+    legend: {
+        show: false
+    },
+    xAxis: {
+        interval: 1,
+        minInterval: 5,
+        boundaryGap: 15,
+        axisLine: {
+            lineStyle: {
+                color: '#31cee9',
+                width: 2
+            }
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#06bcff',
+                fontSize: 14
+            },
+            rotate: 30
+        },
+        data: spcbar2XaxisVal
+    },
+    yAxis: {
+        interval: 1,
+        minInterval: 5,
+        axisLine: {
+            lineStyle: {
+                color: '#31cee9',
+                width: 2
+            },
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#06bcff',
+                fontSize: 16
+            }
+        },
+        splitLine: {
+            show: true,
+            lineStyle: {
+                color: '#113768',
+                type: 'dashed'
+            }
+        }
+    },
+    series: [{
+        name: '交易金额',
+        type: 'bar',
+        barWidth: 25,
+        itemStyle: {
+            normal: {
+                color: '#ffa800',
+                label: {
+                    show: true,
+                    position: 'top',
+                    offset: [0, -25],
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: 20
+                    }
+                }
+            }
+        },
+        data: spcbar2DataVal
+    }, {
+        name: '交易金额',
+        type: 'pictorialBar',
+        barGap: '-100%',
+        symbolPosition: 'end',
+        symbolSize: 50,
+        symbolOffset: [0, '-120%'],
+        data: [{
+            value: spcbar2DataVal[0],
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: spcbar2DataVal[1],
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: spcbar2DataVal[2],
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: spcbar2DataVal[3],
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: spcbar2DataVal[4],
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: spcbar2DataVal[5],
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }]
+    }]
+};
+oSpcBar2.setOption(optionBar2);
+//bar3
+var oSpcBar3 = echarts.init(document.getElementById('spc_bar3'));
+var spcbar3XaxisVal = ['20160930', '20161031', '20161130', '20161231', '20170131', '20170228'];
+var spcbar3DataVal = [1.2, 1.34, 1.33, 1.78, 1.80, 1.92];
+var optionBar3 = {
+    grid: {
+        top: 40,
+        right: 20,
+        bottom: 40,
+        left: 15,
+        containLabel: true
+    },
+    title: {
+        show: false
+    },
+    tooltip: {
+        formatter: '{a}<br>{b}:{c}（万笔）',
+    },
+    legend: {
+        show: false
+    },
+    xAxis: {
+        interval: 1,
+        boundaryGap: 10,
+        axisLine: {
+            lineStyle: {
+                color: '#31cee9',
+                width: 2
+            }
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#06bcff',
+                fontSize: 14
+            },
+            rotate: 30
+        },
+         data:spcbar3XaxisVal
+    },
+    yAxis: {
+        interval: 0.25,
+        minInterval: 0.5,
+        axisLine: {
+            lineStyle: {
+                color: '#31cee9',
+                width: 2
+            },
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#06bcff',
+                fontSize: 14
+            }
+        },
+        splitLine: {
+            show: true,
+            lineStyle: {
+                color: '#113768',
+                type: 'dashed'
+            }
+        }
+    },
+    series: [{
+        name: '交易金额',
+        type: 'bar',
+        barWidth: 25,
+        itemStyle: {
+            normal: {
+                color: '#00d3c4',
+                label: {
+                    show: true,
+                    position: 'top',
+                    offset: [0, -25],
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: 20
+                    }
+                }
+            }
+        },
+        data: spcbar3DataVal
+    }, {
+        name: '交易金额',
+        type: 'pictorialBar',
+        barGap: '-100%',
+        symbolPosition: 'end',
+        symbolSize: 50,
+        symbolOffset: [0, '-120%'],
+        data: [{
+            value: spcbar3DataVal[0],
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: spcbar3DataVal[1],
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: spcbar3DataVal[2],
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: spcbar3DataVal[3],
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: spcbar3DataVal[4],
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }, {
+            value: spcbar3DataVal[5],
+            symbol: 'image://src/image/icon1.png',
+            symbolSize: [65, 45]
+        }]
+    }]
+};
+oSpcBar3.setOption(optionBar3);
+</script>
+</html>

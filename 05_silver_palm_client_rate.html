@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="src/css/reset.css">
+    <link rel="stylesheet" href="src/css/mian.css"></head>
+<body>
+<div class="header clearfix">
+    <div class="logo">
+        <img src="src/image/logo.png" alt="logo"></div>
+    <h1 class="title">重点客户群掌上银行渗透率视图</h1>
+    <div class="msg  clearfix">
+        <div class="msg_time">
+            <p id="showtime">&nbsp;&nbsp;&nbsp;</p>
+            <p id="showdate">&nbsp;&nbsp;&nbsp;</p>
+        </div>
+        <div class="msg_weather" style="padding-top: 20px;">
+            <iframe scrolling="no" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=48&color=%23FFFFFF&icon=1&num=2&site=17"></iframe>
+        </div>
+
+    </div>
+</div>
+<div class="containner e_mt20">
+    <ul   class="tab_warp">
+        <li   id="tab1" class="active">信用卡客户渗透率</li>
+        <li   id="tab2">贵宾客户渗透率</li>
+        <li   id="tab3">个贷客户渗透率</li>
+    </ul>
+    <div  class="zdkhq_bg1  zdkhq_bottom  e_p20">
+        <div id="pane1">
+            <ul  class="spcr_legend">
+                <li  class="clearfix"> <i class="e_float_l"></i>
+                    <span  class="e_float_l">活跃客户</span>
+                </li>
+                <li  class="clearfix"> <i class="e_float_l"></i>
+                    <span class="e_float_l">注册未活跃客户</span>
+                </li>
+                <li  class="clearfix">
+                    <i class="e_float_l"></i>
+                    <span class="e_float_l">客户数</span>
+                </li>
+                <li >
+                    <span class="e_float_l" onclick="toRate()">占比分析</span>
+                </li>
+            </ul>
+            <div id="spcr_line1" ondblclick="myrefresh(oSpcrLine1,optionLine1)"></div>
+        </div>
+        <div id="pane2"  style="background:yellow;"></div>
+        <div id="pane3"  style="background:blue;"></div>
+    </div>
+</div>
+</body>
+<script src="src/js/jquery v1.11.1min.js"></script>
+<script src="src/js/mian.js"></script>
+<script src="src/js/echarts.js"></script>
+<script src="src/js/china.js"></script>
+<script>
+function myrefresh(obj,chart){
+       obj.clear();
+       obj.setOption(chart);
+}
+var flag=1;
+function toRate(){
+    oSpcrLine1.clear();
+    if(flag){
+         oSpcrLine1.setOption(optionLine1Rate);
+    }else{
+        oSpcrLine1.setOption(optionLine1);
+    }
+      flag=!flag;
+}
+//line1
+var oSpcrLine1= echarts.init(document.getElementById('spcr_line1'));
+//line1x轴数据
+var spcrline1XaxisVal1 = [12, 1, 2, 3, 4, 5, 6, 7];
+//line1客户数
+var spcrline1DataVal1 = [318, 330, 366, 375, 388, 399, 450, 440];
+//line1活跃客户
+var spcrline1DataVal2 = [208, 230, 246, 250, 328, 332, 350, 320];
+//line1注册未活跃客户
+var spcrline1DataVal3 = [110, 100, 120, 125, 60, 76, 100, 120];
+//line1活跃客户占比
+var spcrline1rate2 = [];
+//line1注册未活跃客户占比
+var spcrline1rate3 = [];
+for (var i = 0; i < spcrline1DataVal1.length; i++) {
+    spcrline1rate2[i] = ((spcrline1DataVal2[i] / spcrline1DataVal1[i]) * 100).toFixed(2)   +  '%'
+    spcrline1rate3[i] = ((spcrline1DataVal3[i] / spcrline1DataVal1[i]) * 100).toFixed(2)   +  '%'
+}
+var optionLine1 = {
+    tooltip: {
+        trigger: 'axis',
+        textStyle: {
+            color: '#fff',
+            fontSize: 24
+        }
+    },
+    title: {
+        show: false
+    },
+    grid: {
+        left: 60,
+        right: 100,
+        bottom: 0,
+        containLabel: true
+    },
+    xAxis: {
+        type: 'category',
+        name: '（月份）',
+        nameTextStyle: {
+            color: '#fff',
+            fontSize: 22
+        },
+        axisLine: {
+            lineStyle: {
+                color: '#31cee9',
+                width: 3
+            },
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#fff',
+                fontSize: 22
+            }
+        },
+        splitLine: {
+            show: true,
+            lineStyle: {
+                color: '#113768',
+                type: 'dashed'
+            }
+        },
+        axisPointer: {
+            label: {
+                formatter: function(params) {
+                    return params.value + '月' +
+                        (params.seriesData.length ? '：' + params.seriesData[0].data : '');
+                }
+            }
+        },
+        boundaryGap: false,
+        data: spcrline1XaxisVal1
+    },
+    yAxis: {
+        type: 'value',
+        interval: 100,
+        name: '（万户）       ',
+        nameTextStyle: {
+            color: '#fff',
+            fontSize: 22
+        },
+        axisLine: {
+            lineStyle: {
+                color: '#31cee9',
+                width: 3
+            },
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#fff',
+                fontSize: 22
+            }
+        },
+        splitLine: {
+            show: false
+        }
+
+    },
+    series: [{
+        name: '客户数',
+        type: 'line',
+        smooth: true,
+        itemStyle: {
+            normal: {
+                color: '#3b336c'
+            }
+        },
+        areaStyle: {
+            normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: 'rgba(52, 145, 192,0.2)'
+                }, {
+                    offset: 1,
+                    color: 'rgba(52, 145, 192,0)'
+                }])
+            }
+        },
+        label: {
+            normal: {
+                show: true,
+                position: 'top',
+                textStyle: {
+                    color: '#fff',
+                    fontSize: 24
+                }
+            }
+        },
+        data: spcrline1DataVal1
+    }, {
+        name: '活跃客户',
+        type: 'line',
+        smooth: true,
+        label: {
+            normal: {
+                show: true,
+                position: 'top',
+                textStyle: {
+                    color: '#fff',
+                    fontSize: 24
+                }
+            }
+        },
+        areaStyle: {
+            normal: {
+                color: 'rgba(255, 74, 97,1)'
+            }
+        },
+        data: spcrline1DataVal2
+    }, {
+        name: '注册未活跃客户',
+        type: 'line',
+        smooth: true,
+        label: {
+            normal: {
+                show: true,
+                position: 'top',
+                textStyle: {
+                    color: '#fff',
+                    fontSize: 24
+                }
+            }
+        },
+        itemStyle: {
+            normal: {
+                color: '#fadd29'
+            }
+        },
+        lineStyle: {
+            normal: {
+                width: 1
+            }
+        },
+        areaStyle: {
+            normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: 'rgba(250,208,46,1)'
+                }, {
+                    offset: 1,
+                    color: 'rgba(250,208,46,0.7)'
+                }])
+            }
+        },
+        data: spcrline1DataVal3
+    }]
+};
+oSpcrLine1.setOption(optionLine1);
+ var optionLine1Rate = {
+    tooltip: {
+        trigger: 'axis',
+        textStyle: {
+            color: '#fff',
+            fontSize: 24
+        }
+    },
+    title: {
+        show: false
+    },
+    grid: {
+        left: 60,
+        right: 100,
+        bottom: 0,
+        containLabel: true
+    },
+    xAxis: {
+        type: 'category',
+        axisLine: {
+            lineStyle: {
+                color: '#31cee9',
+                width: 3
+            },
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#fff',
+                fontSize: 22
+            }
+        },
+        splitLine: {
+            show: true,
+            lineStyle: {
+                color: '#113768',
+                type: 'dashed'
+            }
+        },
+        axisPointer: {
+            label: {
+                formatter: function(params) {
+                    return params.value + '月' +
+                        (params.seriesData.length ? '：' + params.seriesData[0].data : '');
+                }
+            }
+        },
+        boundaryGap: false,
+        data: ['12', '1', '2', '3', '4', '5', '6', '7']
+    },
+    yAxis: {
+        type: 'value',
+        interval: 100,
+        name: '（万户）       ',
+        nameTextStyle: {
+            color: '#fff',
+            fontSize: 22
+        },
+        axisLine: {
+            lineStyle: {
+                color: '#31cee9',
+                width: 3
+            },
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#fff',
+                fontSize: 22
+            }
+        },
+        splitLine: {
+            show: false
+        }
+
+    },
+    series: [{
+        name: '客户数',
+        type: 'line',
+        smooth: true,
+        itemStyle: {
+            normal: {
+                color: '#3b336c'
+            }
+        },
+        areaStyle: {
+            normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: 'rgba(52, 145, 192,0.2)'
+                }, {
+                    offset: 1,
+                    color: 'rgba(52, 145, 192,0)'
+                }])
+            }
+        },
+        label: {
+            normal: {
+                show: true,
+                position: 'top',
+                textStyle: {
+                    color: '#fff',
+                    fontSize: 24
+                }
+            }
+        },
+        data: spcrline1DataVal1
+    }, {
+        name: '活跃客户',
+        type: 'line',
+        smooth: true,
+        label: {
+            normal: {
+                show: true,
+                position: 'top',
+                textStyle: {
+                    color: '#fff',
+                    fontSize: 24
+                },
+                formatter: function(params) {
+                    return spcrline1rate2[params.dataIndex]
+                }
+            }
+        },
+        areaStyle: {
+            normal: {
+                color: 'rgba(255, 74, 97,1)'
+            }
+        },
+        data: spcrline1DataVal2
+    }, {
+        name: '注册未活跃客户',
+        type: 'line',
+        smooth: true,
+        label: {
+            normal: {
+                show: true,
+                position: 'top',
+                textStyle: {
+                    color: '#fff',
+                    fontSize: 24
+                },
+                formatter: function(params) {
+                    return spcrline1rate3[params.dataIndex]
+                }
+            }
+        },
+        itemStyle: {
+            normal: {
+                color: '#fadd29'
+            }
+        },
+        lineStyle: {
+            normal: {
+                width: 1
+            }
+        },
+        areaStyle: {
+            normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: 'rgba(250,208,46,1)'
+                }, {
+                    offset: 1,
+                    color: 'rgba(250,208,46,0.7)'
+                }])
+            }
+        },
+        data: spcrline1DataVal3
+    }]
+};  
+
+</script>
+</html>

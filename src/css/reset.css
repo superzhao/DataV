@@ -1,0 +1,28 @@
+@charset "utf-8";
+/* use YUI.reset */
+html{-webkit-text-size-adjust:none;}
+body{font-family: "\5FAE\8F6F\96C5\9ED1";font-size:14px;color:#333; background:#fff;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,a,span,i,b{margin:0;padding:0}
+table{border-collapse:collapse;border-spacing:0}
+fieldset,img,input{border:0}
+address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal}
+li{list-style:none}
+caption,th{text-align:left}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}
+i{font-style:normal;}
+q:before,q:after{content:''}
+abbr,acronym{border:0;font-variant:normal}
+sup{vertical-align:text-top}
+sub{vertical-align:text-bottom}
+input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit}
+input,textarea,select{*font-size:100%}
+legend{color:#000}
+a{text-decoration:none;  font-family: "\5FAE\8F6F\96C5\9ED1";}
+a:hover{text-decoration: underline;}
+*{outline:none;}textarea{resize:none}
+button::-moz-focus-inner, input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="submit"]::-moz-focus-inner, input[type="file"] > input[type="button"]::-moz-focus-inner {border:none ;padding:0;}
+.cl{clear:both}
+.clear{clear:both; font-size:0; line-height:0; height:0;}
+.clearfix{zoom:1;}
+.clearfix:after{content:'.';display:block;height:0;visibility:hidden;clear:both; font-size:0;}
+*html .clear{height: 1%;}
