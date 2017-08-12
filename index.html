@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>数据展示屏</title>
+    <link rel="stylesheet" href="src/css/reset.css">
+    <link rel="stylesheet" href="src/css/mian.css">
+    <link rel="stylesheet" href="src/css/09_interactive_center.css">
+    
+    <style type="text/css">
+#mobile4 .wtleft{
+display: none!important;
+}
+.index-ul{
+margin-top: 180px;
+}
+.index-ul li{
+height: 130px;
+}
+.index-ul a{
+display: block;
+height: 130px;
+padding-left: 100px;
+font-size: 30px;
+color: #fff;
+line-height: 130px;
+cursor: pointer;
+background: url(src/image/point.png) no-repeat 390px  50px;
+}
+.interactive-right .index-ul a{
+    padding-left: 30px;
+    background: url(src/image/point.png) no-repeat 490px  50px;
+}
+.index-ul a:hover{
+    color: #00aeec;
+    background: url(src/image/point.png) no-repeat 390px  -89px;
+}
+.interactive-right .index-ul a:hover{
+    background: url(src/image/point.png) no-repeat 490px  -89px;
+}
+    </style>
+}
+</head>
+<body class="body">
+    <div class="header clearfix">
+        <div class="logo">
+            <img src="src/image/logo.png" alt="logo">
+        </div>
+        <h1 class="title">数据展示屏</h1>
+        <div class="msg  clearfix">
+            <div class="msg_time">
+                <p id="showtime">&nbsp;&nbsp;&nbsp;</p>
+                <p id="showdate">&nbsp;&nbsp;&nbsp;</p>
+            </div>
+            <div class="msg_weather" style="padding-top: 20px;">
+                <iframe scrolling="no" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=48&color=%23FFFFFF&icon=1&num=2&site=17"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="blue_bar"></div>
+    <div class="containner clearfix">
+        <div class="interactive-left">
+            <ul class="index-ul">
+                <li>
+                     <i></i>
+                    <a href="01_silver_palm_client.html">掌上银行数据视图</a>
+                </li>
+                <li>
+                     <i></i>
+                    <a href="02_personal_ebank_client.html">个人网银数据视图</a>
+                </li>
+                <li>
+                     <i></i>
+                    <a href="03_enterprise_ebank_client.html">企业网银数据视图</a>
+                </li>
+                <li>
+                     <i></i>
+                    <a href="04_bank_enterprises_connection.html">银企通数据视图</a>
+                </li>
+            </ul>
+        </div>
+        <div class="interactive-middle">
+            <div class="middle-box">
+                <h1>数据展示屏</h1>
+                <div>
+                    <h3>by 李赵</h3>
+                </div>
+            </div>
+        </div>
+        <div class="interactive-right"> 
+            <ul class="index-ul">
+                <li>
+                     <i></i>
+                    <a href="05_silver_palm_client_rate.html">重点客户群掌上银行渗透率视图</a>
+                </li>
+                <li>
+                     <i></i>
+                    <a href="06_mall_registration.html">农银e管家电商平台商户数视图</a>
+                </li>
+                <li>
+                     <i></i>
+                    <a href="07_mall_transaction_count.html">农银e管家电商平台商户数视图</a>
+                </li>
+                <li>
+                     <i></i>
+                    <a href="08_mall_transaction_amount.html">农银e管家电商平台交易金额视图</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+<script src="src/js/echarts.js"></script>
+<script src="src/js/china.js"></script>
+<script src="src/js/jquery v1.11.1min.js"></script>
+<script src="src/js/mian.js"></script>
+</html>
